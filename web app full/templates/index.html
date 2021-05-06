@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Start Trading</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <!--    <link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='navStyle.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    
+    
+    <script>
+    
+    
+//     $(document).ready(function(){
+//                $("#start").datepicker({
+//                    numberOfMonths:1,
+//                    dateFormat:"DD,d MM,yy",
+//                    onSelect:function(selectdate){
+//                        var dt=new Date(selectdate);
+//                        dt.setDate(dt.getDate()+1);
+//                        $('#end').datepicker("option","minDate",dt);
+//                    }
+//                });
+//                
+//                
+//                $("#end").datepicker({
+//                    numberOfMonths:1,
+//                    dateFormat:'DD,d MM,yy',
+//                    onSelect:function(selectdate){
+//                        var dt=new Date(selectdate);
+//                        dt.setDate(dt.getDate()-1);
+//                        $('#start').datepicker("option","maxDate",dt);
+//                    }
+//                });
+//                
+//            });
+        
+    
+    </script>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <style>
+        
+        .row.content {
+            margin-top: 100px;
+            height: 550px;
+            margin-bottom: 13 0px;
+        }
+
+        .sidenav {
+            padding-top: 50px;
+            background-color: #f1f1f1;
+            height: 90%;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+        }
+
+        body {
+            background-image: url('./static/inner-bg.jpg');
+            height: 120%;
+
+
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+
+        .header {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+        }
+
+        .logo {
+            color: rgb(226, 226, 226);
+
+            letter-spacing: 5px;
+            font-size: 20px;
+        }
+
+        /*
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+    }
+*/
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar-fixed-top header" style="height: 11vh;">
+        <div class="navbar-brand" style="color:aliceblue">
+            <h4>Smart Prediction</h4>
+        </div>
+        <ul class="nav-links nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">What is Stock Market</a></li>
+
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+    
+    
+    <div class="container container-lg">
+        <div class="row content">
+
+            <div class="col-sm-9" style="height: 100vh;">
+
+<!--
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Want to decide the future of Investing?<br />
+
+                            <small>You have come to Right place</small>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">Total companies for which you can invest and predict in our website<span class="badge badge-secondary badge-pill">4</span>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+-->
+
+
+                <div class="div-wrapper d-flex justify-content-center align-items-center" style="margin-top: 100px">
+
+                    <form method="POST" action="/predict" onsubmit="return validate();" role="form" id="form">
+
+                        <div class="" style="width: 100%;">
+                            <label for="amount" style="color: whitesmoke;">
+                                Enter the Initial Investment:
+                            </label><br>
+                            <input id="amount" type="integer" style="height: 35px;border-width: 1px;width: 400px;" name="amount" placeholder="Amt in rupees" required />
+                            <p>
+                            <div id="error"></div>
+
+                            <div>
+                                <label for="company" style="color: whitesmoke;">
+                                    Choose the company in which you want to Invest:
+                                </label>
+                                <p>
+                                    
+                                <select name="companies" style="height: 35px;border-width: 1px;width: 400px;" required>
+                                    <option value="none" selected disabled hidden>Select the Company</option>
+                                    <option value="apple">Apple</option>x
+                                    <option value="google">Google</option>
+                                    <option value="microsoft">Microsoft</option>
+                                    <option value="amazon">Amazon</option>
+                                    <option value="All">All</option>
+                                </select>
+                                
+                                
+                            </div>
+                            
+                            <label for="duration" style="color: whitesmoke;">Enter the start Date</label><p>
+                            <input type="date" id="start" name="start_date" required><p>
+                            <label for="duration" style="color: whitesmoke;">Enter the end Date</label><br>
+                            <input type="date" id="end" name="end_date" required><p>
+                            
+                            <div id="date_err"></div>    
+            
+                            <!--                    <input class="w3-button w3-block w3-hover-blue-grey" type="submit" value="Submit">-->
+                            <input class="btn btn-dark" type="submit" value="Start trading">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="col-sm-3 sidenav" >
+
+                <div class="container" style="margin-top: 0px;">
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="/apple_news" target="_blank">Recent news of Apple stock market</a></li><br>
+                        <li class="list-group-item"><a href="/google_news" target="_blank">Recent news of Google stock market</a></li><br>
+                        <li class="list-group-item"><a href="/amazon_news" target="_blank">Recent news of Amazon stock market</a></li><br>
+                        <li class="list-group-item"><a href="/microsoft_news" target="_blank">Recent news of Microsoft stock market</a></li><br>
+                    </ul>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <!--
+    <script type="text/javascript" src="{{url_for('static', filename='jquery.min.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='bootstrap.js')}}"></script>
+-->
+
+        <script>
+            
+           
+           
+            
+            var validate = function() {
+
+                var amt = document.getElementById('amount');
+                var err = document.getElementById('error');
+                var text;
+
+                if (amt.value < 10000 || isNaN(amt.value)) {
+                    //                alert("You should invest a minimum amount of 10000 rs.")
+                    text = "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">" +
+                        "<strong>Minimum Investment should be more than" + "<strong>" + " 10000rs" + "</strong>" +
+                        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">" +
+                        "<span aria-hidden=\"true\">" + "&times;" + "</span>" +
+                        "</button>" +
+                        "</div>";
+                    err.innerHTML = text;
+                    return false;
+                }
+                return true;
+            }
+
+
+            function navSlide() {
+                const burger = document.querySelector(".burger");
+                const nav = document.querySelector(".nav-links");
+                const navLinks = document.querySelectorAll(".nav-links li");
+
+                burger.addEventListener("click", () => {
+                    //Toggle Nav
+                    nav.classList.toggle("nav-active");
+
+                    //Animate Links
+                    navLinks.forEach((link, index) => {
+                        if (link.style.animation) {
+                            link.style.animation = ""
+                        } else {
+                            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
+                        }
+                    });
+                    //Burger Animation
+                    burger.classList.toggle("toggle");
+                });
+
+            }
+
+            navSlide();
+            
+             console.log(document.getElementById('start').value);
+
+        </script>
+        
+        
+        <div class="footer-section-area padding-top-bottom" style="padding-top: 100px;">
+            <div class="container" style="background-color: #1f2b31;">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12"> </a>
+                        <p style="color:white;">Smart Prediction was started with a common goal of serving the finance community while they make transitions. All our team members bring to table their unique expertise and experience of stock market which they would like to pass on to future investors.</p>
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div>
+                            <h3 style="color:white;padding-top: 20px;padding-left: 0px;">Contact Us</h3>
+                        </div>
+                        <div style="padding-top: 25px;">
+                            <ul style="color:white;">
+                                <li><i class="fa fa-map-marker fa-2x"></i>
+                                    100 Feet Ring Road, Banashankari Stage III, Dwaraka Nagar, Banashankari, Bengaluru, Karnataka 560085</li>
+                                <li><i class="fa fa-envelope-o">saqlainpasha1921@gmail.com</i></li>
+                                <li><i class="fa fa-envelope-o">faizansbrsiddiqui@gmail.com</i></li>
+                                <li><i class="fa fa-envelope-o">spnitesh1999@gmail.com</i></li>
+                                <li><i class="fa fa-envelope-o">ksasikiran44@gmail.com</i></li>
+                                <li><i class="fa fa-phone fa-2x"></i>+91 78 92695086</li>
+                            </ul>
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div>
+                            <h3 style="color:white;padding-top: 25px;padding-left: 0px;">Quick Links</h3>
+                        </div>
+                        <div class="information">
+                            <ul>
+                                <li><a style="color:white;padding-top: 10px;" href="/"> <i class="fa fa-arrow-right"></i> HOME</a></li>
+                                <!--                            <li><a style="color:white;" href=""> <i class="fa fa-arrow-right"></i> DASHBOARD</a></li>-->
+                                <li><a style="color:white;" href=""> <i class="fa fa-arrow-right"></i> ABOUT Us</a></li>
+                                <li><a style="color:white;" href=""> <i class="fa fa-arrow-right"></i> LEARN STOCK</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div>
+                            <h3 style="color:white;padding-top: 20px;padding-left: 0px;">Location</h3>
+                        </div>
+                        <div class="our-service">
+                            <!--                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d60383.60024757153!2d72.8317!3d18.9325!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x65cbb9c5d81e88aa!2sJKS%20Wealth%20Management%20Pvt.%20Ltd!5e0!3m2!1sen!2sus!4v1571992752493!5m2!1sen!2sus" width="200" height="200" frameborder="0" style="border:0;padding-left: 0px;" allowfullscreen="false"></iframe>-->
+                            <div class="mapouter">
+                                <div class="gmap_canvas"><iframe width="200" height="200" id="gmap_canvas" src="https://maps.google.com/maps?q=pes%20university%20bangalore&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org"></a><br>
+                                    <style>
+                                        .mapouter {
+                                            position: relative;
+                                            text-align: right;
+                                            height: 200px;
+                                            width: 200px;
+                                        }
+
+                                    </style><a href="https://www.embedgooglemap.net"></a>
+                                    <style>
+                                        .gmap_canvas {
+                                            overflow: hidden;
+                                            background: none !important;
+                                            height: 200px;
+                                            width: 200px;
+                                        }
+
+                                    </style>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
